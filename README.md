@@ -75,13 +75,7 @@ Train multiple base models:
 
 ---
 
-## 📈 Results
 
-| Model               | Accuracy |
-|--------------------|---------|
-| XGBoost            | 95.27%  |
-| Decision Tree      | 85.00%  |
-| Logistic Regression| 81.79%  |
 
 👉 The stacking model improves overall performance and provides reliable predictions. :contentReference[oaicite:0]{index=0}
 
