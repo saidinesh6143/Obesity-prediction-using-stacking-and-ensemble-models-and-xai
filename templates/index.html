@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multilevel Obesity Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>Obesity Prediction — Prediction Form</header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Multilevel Obesity Prediction</h2>
+
+      <form method="POST" action="/predict" class="form-grid">
+        {% set field_labels = {
+          "Gender": "Gender",
+          "Age": "Age",
+          "Height": "Height (in m)",
+          "Weight": "Weight (in kg)",
+          "family_history_with_overweight": "Family History of Overweight",
+          "FAVC": "Frequent High Caloric Food Consumption (FAVC)",
+          "FCVC": "Frequency of Vegetable Consumption (FCVC)",
+          "NCP": "Number of Main Meals (NCP)",
+          "CAEC": "Consumption of Food Between Meals (CAEC)",
+          "SMOKE": "Smoke",
+          "CH2O": "Daily Water Intake (CH2O)",
+          "SCC": "Monitoring Caloric Consumption (SCC)",
+          "FAF": "Physical Activity Frequency (FAF)",
+          "TUE": "Time Using Technology Devices (TUE)",
+          "CALC": "Alcohol Consumption (CALC)",
+          "MTRANS": "Transportation Used (MTRANS)"
+        } %}
+
+        {% for f in fields %}
+          <div class="form-field">
+            <label>{{ field_labels[f] if f in field_labels else f }}</label>
+
+            {% if f in num_cols %}
+              <input name="{{ f }}" type="number" step="any" required />
+
+            {% elif f in cat_options %}
+              <select name="{{ f }}" required>
+                <option value="">Select</option>
+                {% for val in cat_options[f] %}
+                  <option value="{{ val }}">{{ val }}</option>
+                {% endfor %}
+              </select>
+
+            {% else %}
+              <input name="{{ f }}" type="text" required />
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <div class="form-actions">
+          <button type="submit">Predict</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>Obesity</footer>
+</body>
+</html>
